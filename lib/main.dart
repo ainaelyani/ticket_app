@@ -3,6 +3,8 @@ import 'package:ticket_app2/base/bottom_nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -10,7 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( //must have to holding screen
+    return const MaterialApp( //must have to holding screen
+      debugShowCheckedModeBanner: false,
       home: BottomNavBar(),
     );
   }
