@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app2/base/res/styles/app_styles.dart';
+import 'package:ticket_app2/base/widgets/app_column_text_layout.dart';
 import 'package:ticket_app2/base/widgets/app_layoutbuilder_widget.dart';
 import 'package:ticket_app2/base/widgets/big_circle.dart';
 import 'package:ticket_app2/base/widgets/big_dot.dart';
+import 'package:ticket_app2/base/widgets/text_style_fourth.dart';
+import 'package:ticket_app2/base/widgets/text_style_third.dart';
 
 class TicketView extends StatelessWidget {
   const TicketView({super.key});
@@ -18,6 +21,7 @@ class TicketView extends StatelessWidget {
         margin: EdgeInsets.only(right: 16),
         child: Column(
           children: [
+            //blue part of the ticket
             Container(
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -32,10 +36,7 @@ class TicketView extends StatelessWidget {
                   //show departure and destination with icons first line
                   Row(
                     children: [
-                      Text(
-                        "NYC",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                      ),
+                      const TextStyleThird(text: "NYC"),
                       Expanded(child: Container()),
                       const BigDot(),
                       Expanded(
@@ -59,45 +60,41 @@ class TicketView extends StatelessWidget {
                       ),
                       const BigDot(),
                       Expanded(child: Container()),
-                      Text(
-                        "LDN",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                      ),
+                      const TextStyleThird(text: "LDN"),
                     ],
                   ),
                   const SizedBox(height: 3),
                   //show departure and destination names with time
                   Row(
                     children: [
-                      Text(
-                        "New-York",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
+                      const SizedBox(
+                        width: 100,
+                        child: TextStyleFourth(text: "New-York"),
                       ),
                       Expanded(child: Container()),
-                      Text(
-                        "8H 30M",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                      ),
+                      const TextStyleFourth(text: "8H 30M"),
                       Expanded(child: Container()),
-                      Text(
-                        "London",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
+                      const SizedBox(
+                        width: 100,
+                        child: TextStyleFourth(text: "London", align: TextAlign.end),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
+            //circles and dots
             Container(
               color: AppStyles.ticketOrange,
-              child: Row(
+              child:const Row(
                 children: [
                   BigCircle(isRight: false),
-                  Expanded(child: Container()),
-                  BigCircle(isRight: true),
+                  Expanded(child: AppLayoutBuilderWidget(randomDivider: 16,width: 6)),
+                   BigCircle(isRight: true),
                 ],
               ),
             ),
+            //orange part of the ticket
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -107,62 +104,28 @@ class TicketView extends StatelessWidget {
                   bottomRight: Radius.circular(21),
                 ),
               ),
-              child: Column(
+              child: const Column(
                 children: [
                   //show departure and destination with icons first line
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "NYC",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
+                      AppColumnTextLayout(
+                        topText: "1 MAY",
+                        bottomText: "Date",
+                        alignment: CrossAxisAlignment.start,
                       ),
-                      Expanded(child: Container()),
-                      const BigDot(),
-                      Expanded(
-                        child: Stack(
-                          children: [
-                            const SizedBox(
-                              height: 24,
-                              child: AppLayoutBuilderWidget(randomDivider: 6),
-                            ),
-                            Center(
-                              child: Transform.rotate(
-                                angle: 1.57,
-                                child: const Icon(
-                                  Icons.local_airport_rounded,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      AppColumnTextLayout(
+                        topText: "08:00 AM",
+                        bottomText: "Departure time",
+                        alignment: CrossAxisAlignment.center,
                       ),
-                      const BigDot(),
-                      Expanded(child: Container()),
-                      Text(
-                        "LDN",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
+                      AppColumnTextLayout(
+                        topText: "23",
+                        bottomText: "Number",
+                        alignment: CrossAxisAlignment.end,
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 3),
-                  //show departure and destination names with time
-                  Row(
-                    children: [
-                      Text(
-                        "New-York",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                      ),
-                      Expanded(child: Container()),
-                      Text(
-                        "8H 30M",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                      ),
-                      Expanded(child: Container()),
-                      Text(
-                        "London",
-                        style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                      ),
+
                     ],
                   ),
                 ],
