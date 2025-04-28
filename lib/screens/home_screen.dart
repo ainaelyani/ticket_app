@@ -1,6 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ticket_app2/base/utils/all_json.dart';
 import 'package:ticket_app2/base/widgets/app_double_text.dart';
 import 'package:ticket_app2/base/widgets/ticket_view.dart';
 
@@ -67,8 +68,13 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 40),
                 const AppDoubleText(bigText: 'Upcoming Flight', smallText: 'View all',),
                 const SizedBox(height: 20),
-                TicketView()
-
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                    child:Row(
+                      children: ticketList.take(2).map((singleTicket) => TicketView(ticket:singleTicket)
+                      ).toList(),
+                    ),
+                ),
               ],
             ),
           ),

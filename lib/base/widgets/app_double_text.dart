@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ticket_app2/screens/all_tickets.dart';
 
 import '../res/styles/app_styles.dart';
 
@@ -15,9 +16,7 @@ class AppDoubleText extends StatelessWidget {
       children: [
         Text(bigText, style: AppStyles.headLineStyle2),
         InkWell(
-          onTap:(){
-
-          },
+          onTap:() => Navigator.pushNamed(context, "all_tickets"),
           child: Text(smallText, style: AppStyles.textStyle.copyWith(
             color: AppStyles.primaryColor
           )),
