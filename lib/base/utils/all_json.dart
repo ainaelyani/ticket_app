@@ -27,4 +27,53 @@ List<Map<String, dynamic>> ticketList = [
     'departure_time':"09:00 AM",
     "number":45
   },
+  {
+    'from': {
+      'code':"KL",
+      'name':"Kuala Lumpur"
+    },
+    'to': {
+      'code':"TKY",
+      'name':"Tokyo"
+    },
+    'flying_time': '7H 10M',
+    'date': "2 MAY",
+    'departure_time':"09:00 AM",
+    "number":25
+  },
+  {
+    'from': {
+      'code':"SIN",
+      'name':"Singapore"
+    },
+    'to': {
+      'code':"ICN",
+      'name':"Seoul"
+    },
+    'flying_time': '6H 40M',
+    'date': "4 MAY",
+    'departure_time':"12:00 PM",
+    "number":44
+  },
+];
+
+List<Map<String, dynamic>> hotelList = [
+  {
+    'image': 'hotel_room.png',
+    'place': 'Open Space',
+    'destination': 'London',
+    'price': 25
+  },
+  {
+    'image': 'city_view.png',
+    'place': 'Global Will',
+    'destination': 'London',
+    'price': 40
+  },
+  {
+    'image': 'pool_view.png',
+    'place': 'Best city pool',
+    'destination': 'Dubai',
+    'price': 68
+  },
 ];
