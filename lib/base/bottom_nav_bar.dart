@@ -1,48 +1,41 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ticket_app2/screens/profile/profile.dart';
 import 'package:ticket_app2/screens/search/search_screen.dart';
-
+import 'package:get/get.dart';
+import '../controller/bottom_nav_controller.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/ticket/ticket_screen.dart';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+class BottomNavBar extends StatelessWidget {
+   BottomNavBar({super.key});
+   //dependencies injection
+   final BottomNavController controller = Get.put(BottomNavController());
 
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
   final appScreen=[
     const HomeScreen(),
     const SearchScreen(),
     const TicketScreen(),
-    const Center(child: Text("Profile"))
+    const ProfileScreen()
   ];
 
   //change the index for BottomNavBar
-  int _selectedIndex = 0;
-  void _onItemTapped(int index){
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      body: appScreen[_selectedIndex],
+    return Obx((){
+      return Scaffold(
+        body: appScreen[controller.selectedIndex.value],
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap:_onItemTapped,
+          currentIndex: controller.selectedIndex.value,
+          onTap:controller.onItemTapped,
           selectedItemColor: Colors.blueGrey,
           unselectedItemColor: const Color(0xFF526400),
           showSelectedLabels: false,
           items: [
             BottomNavigationBarItem(icon: Icon (FluentSystemIcons.ic_fluent_home_regular),
-                 activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
+                activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
                 label: "Home"),
 
             BottomNavigationBarItem(icon: Icon (FluentSystemIcons.ic_fluent_search_regular),
@@ -57,7 +50,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 activeIcon: Icon(FluentSystemIcons.ic_fluent_person_filled),
                 label: "Profile"),
           ],
-       ),
-    );
+        ),
+      );
+    });
   }
 }

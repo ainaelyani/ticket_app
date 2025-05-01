@@ -9,6 +9,7 @@ import 'package:ticket_app2/screens/home/widgets/hotel.dart';
 
 import '../../base/res/media.dart';
 import '../../base/res/styles/app_styles.dart';
+import '../../base/widgets/heading_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,10 +39,8 @@ class HomeScreen extends StatelessWidget {
                           style: AppStyles.headLineStyle3
                         ),
                         const SizedBox(height: 5), //gap between
-                        Text(
-                          "Book Tickets",
-                          style: AppStyles.headLineStyle1
-                        ),
+
+                        HeadingText(text: "Book Tickets", isColor: false),
                       ],
                     ),
                     Container(
@@ -78,7 +77,13 @@ class HomeScreen extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                     child:Row(
-                      children: ticketList.take(3).map((singleTicket) => TicketView(ticket:singleTicket)
+                      children: ticketList.take(3).map((singleTicket) => GestureDetector(
+                        onTap: (){
+                          var index = ticketList.indexOf(singleTicket);
+                          Navigator.pushNamed(context, AppRoutes.ticketScreen,
+                              arguments: {"index":index});
+                        },
+                          child: TicketView(ticket:singleTicket))
                       ).toList(),
                     ),
                 ),
@@ -94,7 +99,15 @@ class HomeScreen extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: hotelList.take(3).map((singleHotel) => Hotel(hotel:singleHotel)
+                      children: hotelList.take(2).map((singleHotel) => GestureDetector(
+                          onTap: (){
+                            var index = hotelList.indexOf(singleHotel);
+                            Navigator.pushNamed(context, AppRoutes.hotelDetail, arguments: {
+                              "index": index
+                            }
+                            );
+                          },
+                          child: Hotel(hotel:singleHotel))
                       ).toList(),
                     ),
                 ),

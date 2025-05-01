@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_app2/base/res/styles/app_styles.dart';
 import 'package:ticket_app2/base/utils/all_json.dart';
+import 'package:get/get.dart';
+
+import '../controller/text_expansion_controller.dart';
 
 class HotelDetail extends StatefulWidget {
   const HotelDetail({super.key});
@@ -86,24 +89,28 @@ class _HotelDetailState extends State<HotelDetail> {
           SliverList(delegate: SliverChildListDelegate(
             [
               Padding(padding: EdgeInsets.all(16.0),
-              child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."),),
+              child: ExpandedTextWidget(
+                  text: hotelList[index]["detail"]
+                ),
+              ),
               Padding(padding: EdgeInsets.all(16.0),
               child: Text("More Images",
               style: TextStyle(
                 fontSize: 20.0, fontWeight: FontWeight.bold
               ),),
               ),
-              Container(
+              SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                    itemBuilder: (context,index){
+                  itemCount: hotelList[index]["images"].length,
+                    itemBuilder: (context,imagesIndex){
+
                     return Container(
                       margin: EdgeInsets.all(16),
                       //color: Colors.red,
-                      child: Image.network(
-                      "https://via.placeholder.com/200x200"),
+                      child: Image.asset(
+                      "assets/images/${hotelList[index]["images"][imagesIndex]}"),
                     );
                 }),
               )
@@ -114,3 +121,39 @@ class _HotelDetailState extends State<HotelDetail> {
     );
   }
 }
+
+class ExpandedTextWidget extends StatelessWidget {
+  ExpandedTextWidget({super.key, required this.text});
+  final String text;
+
+ final TextExpansionController controller = Get.put(TextExpansionController());
+  @override
+  Widget build(BuildContext context) {
+
+    return Obx((){
+      var textWidget = Text(
+        text,
+        maxLines:controller.isExpanded.value?null: 3,
+        overflow: controller.isExpanded.value?TextOverflow.visible:TextOverflow.ellipsis,
+      );
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          textWidget,
+          GestureDetector(
+            onTap: (){
+              controller.toggleExpansion();
+            },
+            child: Text(
+              controller.isExpanded.value?"Less":"More",
+              style: AppStyles.textStyle.copyWith(
+                  color: AppStyles.primaryColor
+              ),
+            ),
+          ),
+        ],
+      );
+    });
+  }
+}
+
