@@ -6,7 +6,6 @@ import 'package:ticket_app2/base/utils/app_routes.dart';
 import 'package:ticket_app2/base/widgets/app_double_text.dart';
 import 'package:ticket_app2/base/widgets/ticket_view.dart';
 import 'package:ticket_app2/screens/home/widgets/hotel.dart';
-
 import '../../base/res/media.dart';
 import '../../base/res/styles/app_styles.dart';
 import '../../base/widgets/heading_text.dart';
